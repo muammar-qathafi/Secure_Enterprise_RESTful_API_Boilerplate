@@ -106,7 +106,7 @@ jobs:
         run: npx prisma migrate deploy
 
       - name: Run tests with coverage
-        run: npm run test:coverage
+        run: npm run test:coverage -- --runInBand
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
