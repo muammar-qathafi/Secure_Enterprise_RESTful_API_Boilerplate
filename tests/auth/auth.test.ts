@@ -5,11 +5,13 @@ import { hashPassword } from '../../src/utils/password.util';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
-async function createUser(overrides: Partial<{
-  email: string;
-  username: string;
-  password: string;
-}> = {}) {
+async function createUser(
+  overrides: Partial<{
+    email: string;
+    username: string;
+    password: string;
+  }> = {},
+) {
   const data = {
     email: overrides.email ?? 'test@example.com',
     username: overrides.username ?? 'testuser',
@@ -106,7 +108,11 @@ describe('POST /api/v1/auth/login', () => {
   const url = '/api/v1/auth/login';
 
   beforeEach(async () => {
-    await createUser({ email: 'login@example.com', username: 'loginuser', password: 'Str0ng!Pass' });
+    await createUser({
+      email: 'login@example.com',
+      username: 'loginuser',
+      password: 'Str0ng!Pass',
+    });
   });
 
   it('should return 200 with tokens on valid credentials', async () => {
@@ -150,7 +156,11 @@ describe('POST /api/v1/auth/refresh', () => {
   const refreshUrl = '/api/v1/auth/refresh';
 
   it('should issue new tokens given a valid refresh token', async () => {
-    await createUser({ email: 'refresh@example.com', username: 'refreshuser', password: 'Str0ng!Pass' });
+    await createUser({
+      email: 'refresh@example.com',
+      username: 'refreshuser',
+      password: 'Str0ng!Pass',
+    });
 
     const loginRes = await request(app).post(loginUrl).send({
       email: 'refresh@example.com',
@@ -190,9 +200,7 @@ describe('GET /api/v1/auth/me', () => {
 
     const { accessToken } = loginRes.body.data.tokens;
 
-    const res = await request(app)
-      .get(meUrl)
-      .set('Authorization', `Bearer ${accessToken}`);
+    const res = await request(app).get(meUrl).set('Authorization', `Bearer ${accessToken}`);
 
     expect(res.status).toBe(200);
     expect(res.body.data.email).toBe('me@example.com');
@@ -211,7 +219,11 @@ describe('POST /api/v1/auth/logout', () => {
   const loginUrl = '/api/v1/auth/login';
 
   it('should logout and revoke the session', async () => {
-    await createUser({ email: 'logout@example.com', username: 'logoutuser', password: 'Str0ng!Pass' });
+    await createUser({
+      email: 'logout@example.com',
+      username: 'logoutuser',
+      password: 'Str0ng!Pass',
+    });
 
     const loginRes = await request(app).post(loginUrl).send({
       email: 'logout@example.com',

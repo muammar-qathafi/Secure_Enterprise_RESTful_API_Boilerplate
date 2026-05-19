@@ -103,14 +103,17 @@ export class AuthService {
    * Uses the same error message for invalid email and invalid password
    * to prevent user enumeration (OWASP A01).
    */
-  async login(
-    data: LoginInput,
-    ipAddress?: string,
-    userAgent?: string,
-  ): Promise<AuthResult> {
+  async login(data: LoginInput, ipAddress?: string, userAgent?: string): Promise<AuthResult> {
     const user = await prisma.user.findUnique({
       where: { email: data.email },
-      select: { id: true, email: true, username: true, passwordHash: true, role: true, isActive: true },
+      select: {
+        id: true,
+        email: true,
+        username: true,
+        passwordHash: true,
+        role: true,
+        isActive: true,
+      },
     });
 
     // Constant-time comparison prevents timing attacks even when user is not found
@@ -170,7 +173,9 @@ export class AuthService {
 
     const storedToken = await prisma.refreshToken.findUnique({
       where: { token: data.refreshToken },
-      include: { user: { select: { id: true, email: true, username: true, role: true, isActive: true } } },
+      include: {
+        user: { select: { id: true, email: true, username: true, role: true, isActive: true } },
+      },
     });
 
     if (!storedToken || storedToken.isRevoked || storedToken.expiresAt < new Date()) {

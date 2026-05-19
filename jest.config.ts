@@ -10,12 +10,7 @@ const config: Config = {
   },
   setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
   coverageDirectory: 'coverage',
-  collectCoverageFrom: [
-    'src/**/*.ts',
-    '!src/server.ts',
-    '!src/types/**',
-    '!src/config/env.ts',
-  ],
+  collectCoverageFrom: ['src/**/*.ts', '!src/server.ts', '!src/types/**', '!src/config/env.ts'],
   coverageThreshold: {
     global: {
       branches: 70,

@@ -25,7 +25,10 @@ export class UserService {
 
     const where: {
       role?: Role;
-      OR?: Array<{ email?: { contains: string; mode: 'insensitive' }; username?: { contains: string; mode: 'insensitive' } }>;
+      OR?: Array<{
+        email?: { contains: string; mode: 'insensitive' };
+        username?: { contains: string; mode: 'insensitive' };
+      }>;
     } = {};
 
     if (search) {

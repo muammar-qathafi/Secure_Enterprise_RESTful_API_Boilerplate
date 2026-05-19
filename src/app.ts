@@ -142,7 +142,11 @@ const swaggerOptions: swaggerJsdoc.Options = {
           properties: {
             accessToken: { type: 'string', description: 'JWT access token (15 min TTL)' },
             refreshToken: { type: 'string', description: 'Opaque refresh token (7 day TTL)' },
-            expiresIn: { type: 'integer', example: 900, description: 'Access token TTL in seconds' },
+            expiresIn: {
+              type: 'integer',
+              example: 900,
+              description: 'Access token TTL in seconds',
+            },
           },
         },
         AuditLogObject: {

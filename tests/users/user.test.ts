@@ -43,9 +43,7 @@ describe('GET /api/v1/users', () => {
       role: Role.ADMIN,
     });
 
-    const res = await request(app)
-      .get(url)
-      .set('Authorization', `Bearer ${accessToken}`);
+    const res = await request(app).get(url).set('Authorization', `Bearer ${accessToken}`);
 
     expect(res.status).toBe(200);
     expect(res.body.success).toBe(true);
@@ -61,9 +59,7 @@ describe('GET /api/v1/users', () => {
       role: Role.USER,
     });
 
-    const res = await request(app)
-      .get(url)
-      .set('Authorization', `Bearer ${accessToken}`);
+    const res = await request(app).get(url).set('Authorization', `Bearer ${accessToken}`);
 
     expect(res.status).toBe(403);
   });

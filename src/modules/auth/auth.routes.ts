@@ -236,12 +236,7 @@ router.post('/refresh', validate({ body: refreshTokenSchema }), authController.r
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.post(
-  '/logout',
-  authenticate,
-  validate({ body: refreshTokenSchema }),
-  authController.logout,
-);
+router.post('/logout', authenticate, validate({ body: refreshTokenSchema }), authController.logout);
 
 /**
  * @swagger
@@ -342,4 +337,3 @@ router.patch(
 );
 
 export default router;
-

@@ -9,12 +9,8 @@ async function bootstrap(): Promise<void> {
   getRedisClient(); // Eagerly establish Redis connection
 
   const server = app.listen(env.PORT, () => {
-    logger.info(
-      `🚀 ${env.APP_NAME} running on port ${env.PORT} [${env.NODE_ENV}]`,
-    );
-    logger.info(
-      `📚 Swagger UI: http://localhost:${env.PORT}/api-docs`,
-    );
+    logger.info(`🚀 ${env.APP_NAME} running on port ${env.PORT} [${env.NODE_ENV}]`);
+    logger.info(`📚 Swagger UI: http://localhost:${env.PORT}/api-docs`);
   });
 
   // ─── Graceful Shutdown ───────────────────────────────────────────────────

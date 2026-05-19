@@ -38,10 +38,7 @@ export function errorHandler(
   }
 
   // Prisma unique constraint violation
-  if (
-    error instanceof Prisma.PrismaClientKnownRequestError &&
-    error.code === 'P2002'
-  ) {
+  if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
     res.status(409).json({
       success: false,
       message: 'A record with this value already exists.',
@@ -51,10 +48,7 @@ export function errorHandler(
   }
 
   // Prisma record not found
-  if (
-    error instanceof Prisma.PrismaClientKnownRequestError &&
-    error.code === 'P2025'
-  ) {
+  if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
     res.status(404).json({
       success: false,
       message: 'Record not found.',

@@ -3,10 +3,10 @@ import { env } from '../config/env';
 import { UnauthorizedError } from './AppError';
 
 export interface TokenPayload {
-  sub: string;    // user id
+  sub: string; // user id
   email: string;
   role: string;
-  jti?: string;   // JWT ID for token blacklisting
+  jti?: string; // JWT ID for token blacklisting
   type: 'access' | 'refresh';
 }
 
